@@ -13,6 +13,11 @@ var server = app.listen(3000, () => {
 })
 
 var io = socketio(server);
+
 io.on('connection', socket => {
-  console.log('client connected:', socket);
+  console.log('client connected:', socket.id);
+
+  socket.on('disconnect', () => {
+    console.log('client disconnected:', socket.id);
+  })
 });
