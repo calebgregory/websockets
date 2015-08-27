@@ -7,9 +7,12 @@ var app = express();
 
 app.use(express.static('client'));
 
-app.listen(3000, () => {
+var server = app.listen(3000, () => {
   console.log('server listeningo on port 3000');
   console.log('goto: >> http://localhost:3000');
 })
 
-socketio(server);
+var io = socketio(server);
+io.on('connection', socket => {
+  console.log('client connected:', socket);
+});
