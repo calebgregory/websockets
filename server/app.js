@@ -19,5 +19,12 @@ io.on('connection', socket => {
 
   socket.on('disconnect', () => {
     console.log('client disconnected:', socket.id);
-  })
+  });
+
+  socket.on('chatMessage', msg => {
+    console.log('chat message received:',msg);
+    //socket.emit('chatMessage', { toOne: msg });
+    //socket.broadcast.emit('chatMessage', { toOthers: msg });
+    io.emit('chatMessage', msg);
+  });
 });
